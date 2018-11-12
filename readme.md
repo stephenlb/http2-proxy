@@ -1,6 +1,13 @@
-# PubNub HTTP/2 Proxy
+# Test HTTP/2 with Nginx Proxy
 
-Run a proxy that uses HTTP/2 connections with proxy to PubNub API Calls.
+How to run an HTTP/2 proxy that uses HTTP/2 connections to your server.
+By default this wlil proxy to PubNub APIs.
+
+This is a dockerfile that comes installed with HTTP/2 Nginx.
+To change the upstream value, open `nginx.conf` and set the `server`
+to point to your domain.
+The domain is currently set to `pubsub.pubnub.com` by default.
+The examples in this readme will use PubNub URLs for testing purposes.
 
 ### Single instance version of PubNub.
 
