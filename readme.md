@@ -6,20 +6,22 @@ Run a proxy that uses HTTP/2 connections with proxy to PubNub API Calls.
 
 ```shell
 docker build -t pubnub-http2 .
-docker run -p 8080:8080 pubnub-http2  ## Test
-docker run -p 80:8080 pubnub-http2    ## Prod
+docker run -p 4443:4443 pubnub-http2  ## Test
+docker run -p 443:4443 pubnub-http2   ## Prod
 ```
 
 ### Test Local Container
 
 Open Chrome with this url to test connection to your docker container:
-http://pubnub.github.io/pubnub-tools/console/console.html?channel=apple&origin=0.0.0.0:8080&sub=demo&pub=demo
+http://stephenlb.github.io/pubnub-tools/console/console.html?channel=apple&origin=0.0.0.0:4443&sub=demo&pub=demo
 
-### Local SSH Access to Container.
+### CURL Test
+
+Test PubNub With HTTP/2.
 
 ```shell
-docker ps                          ## get IMAGE_ID
-docker exec -it IMAGE_ID /bin/bash ## ssh
+curl https://0.0.0.0:4443/time/0 -v -k --http2 ## Verbose w/ Headers
+curl https://0.0.0.0:4443/time/0    -k --http2 ## Output Response Only
 ```
 
 ### Export/Import Docker Container
