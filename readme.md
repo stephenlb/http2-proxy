@@ -10,6 +10,11 @@ docker run -p 4443:4443 pubnub-http2  ## Test
 docker run -p 443:4443 pubnub-http2   ## Prod
 ```
 
+Notice that HTTP/2.0 will show up in the logs.
+And HTTP/1.1 will show up for 1.1 requests.
+
+![HTTP/2 Default Transport](https://i.imgur.com/Y20dm7M.png)
+
 ### Chrome/Browser Test
 
 You need to add an exception for a self-signed certificate.
