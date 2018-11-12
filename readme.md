@@ -15,15 +15,6 @@ And HTTP/1.1 will show up for 1.1 requests.
 
 ![HTTP/2 Default Transport](https://i.imgur.com/Y20dm7M.png)
 
-### Chrome/Browser Test
-
-You need to add an exception for a self-signed certificate.
-
- 1. Go to: https://0.0.0.0:4443/time/0
- 2. Add certificate.
- 3. Go to: https://www.pubnub.com/docs/console?channel=pubnub-twitter&origin=0.0.0.0:4443&sub=sub-c-78806dd4-42a6-11e4-aed8-02ee2ddab7fe
- 4. You should see HTTP/2 Traffic and JSON messages from Tweets.
-
 ### CURL Test
 
 Test PubNub With HTTP/2.
@@ -40,9 +31,19 @@ curl https://0.0.0.0:4443/time/0 -v -k --http1.1 ## Verbose w/ Headers
 curl https://0.0.0.0:4443/time/0    -k --http1.1 ## Output Response Only
 ```
 
+### Browser Test
+
+You need to add an exception for a self-signed certificate.
+
+ 1. Go to: https://0.0.0.0:4443/time/0
+ 2. Add exception to self-signed certificate.
+ 3. Go to: https://www.pubnub.com/docs/console?channel=pubnub-twitter&origin=0.0.0.0:4443&sub=sub-c-78806dd4-42a6-11e4-aed8-02ee2ddab7fe
+ 4. You should see HTTP/2 Traffic and JSON messages from Live Tweets.
+
 ### SDK Testing 
 
 Download the SDK and set the `origin` parameter as `0.0.0.0:4443`.
+This will test HTTP/1.1 againts HTTP/2 endpoint.
 Here is an example with Python:
 
 ```python
