@@ -1,20 +1,26 @@
-# Test HTTP/2 with Nginx Proxy
+# Test HTTP/2 using an Nginx Proxy
 
-How to run an HTTP/2 proxy that uses HTTP/2 connections to your server.
+Do you want to test HTTP/2 without deploying any code?
+This is how to test HTTP/2.0 connections from your computer.
+This proxy will connect HTTP/2.0 then proxy that connection
+to your production or staging web server.
+
+This is how to run an HTTP/2 proxy that uses HTTP/2 connections to your server.
+This will guide you on how to do it!
 By default this wlil proxy to PubNub APIs.
 
-This is a dockerfile that comes installed with HTTP/2 Nginx.
+The dockerfile comes ready with HTTP/2 Nginx.
 To change the upstream value, open `nginx.conf` and set the `server`
 to point to your domain.
+Re-run the build step for any changes you make to `nginx.conf`.
 The domain is currently set to `pubsub.pubnub.com` by default.
 The examples in this readme will use PubNub URLs for testing purposes.
 
 ### Single instance version of PubNub.
 
 ```shell
-docker build -t pubnub-http2 .
-docker run -p 4443:4443 pubnub-http2  ## Test
-docker run -p 443:4443 pubnub-http2   ## Prod
+docker build -t http2 .
+docker run -p 4443:4443 http2
 ```
 
 Notice that HTTP/2.0 will show up in the logs.
@@ -75,11 +81,11 @@ To get this container running on EC2, we can import/export a tarball.
 
 ```shell
 ## Save/Export
-docker save pubnub-http2 > pubnub-http2.tar
-gzip -9 pubnub-http2.tar
+docker save http2 > http2.tar
+gzip -9 http2.tar
 
 ## Import/Load
-docker load < pubnub-http2.tar.gz
+docker load < http2.tar.gz
 ```
 
 ### Self Signed Certificate
