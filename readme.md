@@ -16,6 +16,21 @@ Re-run the build step for any changes you make to `nginx.conf`.
 The domain is currently set to `pubsub.pubnub.com` by default.
 The examples in this readme will use PubNub URLs for testing purposes.
 
+### Change your Upstream
+
+Easily update the upstream to target your servers.
+
+```nginx
+## -----------------------------------------------------------------------
+## Upstreams
+## -----------------------------------------------------------------------
+upstream pubnub_servers {
+    ## Change pubsub.pubnub.com to your-server.com
+    server pubsub.pubnub.com:80 max_fails=3; ## <------- Change this line
+    keepalive 512;
+}
+```
+
 ### Single instance version of PubNub.
 
 ```shell
