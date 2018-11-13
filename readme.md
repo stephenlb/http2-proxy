@@ -19,6 +19,7 @@ The examples in this readme will use PubNub URLs for testing purposes.
 ### Change your Upstream
 
 Easily update the upstream to target your servers.
+Open `nginx.conf` and edit the line below.
 
 ```nginx
 ## -----------------------------------------------------------------------
@@ -26,12 +27,17 @@ Easily update the upstream to target your servers.
 ## -----------------------------------------------------------------------
 upstream pubnub_servers {
     ## Change pubsub.pubnub.com to your-server.com
+    ## server your-server.com:80 max_fails=3;
     server pubsub.pubnub.com:80 max_fails=3; ## <------- Change this line
     keepalive 512;
 }
 ```
 
 ### Build and Run Docker
+
+Build and run the dockerfile.
+This will launch an HTTPS server with HTTP/2.0 enabled.
+The access and error logs will print to STDOUT.
 
 ```shell
 docker build -t http2 .
