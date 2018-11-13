@@ -31,7 +31,7 @@ upstream pubnub_servers {
 }
 ```
 
-### Single instance version of PubNub.
+### Build and Run Docker
 
 ```shell
 docker build -t http2 .
@@ -45,7 +45,8 @@ And HTTP/1.1 will show up for 1.1 client requests.
 
 ### CURL Test
 
-Test PubNub With HTTP/2.
+Test a url with HTTP/2.
+This example uses a PubNub URL.
 
 ```shell
 curl https://0.0.0.0:4443/time/0 -v -k --http2 ## Verbose w/ Headers
