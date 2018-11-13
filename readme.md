@@ -23,10 +23,10 @@ docker build -t http2 .
 docker run -p 4443:4443 http2
 ```
 
-Notice that HTTP/2.0 will show up in the logs.
-And HTTP/1.1 will show up for 1.1 requests.
+Notice that HTTP/2.0 will show up in the logs if an HTTP/2 client is used.
+And HTTP/1.1 will show up for 1.1 client requests.
 
-![HTTP/2 Default Transport](https://i.imgur.com/Y20dm7M.png)
+![how to run an HTTP/2 proxy](https://i.imgur.com/Y20dm7M.png)
 
 ### CURL Test
 
@@ -55,9 +55,9 @@ You need to add an exception for a self-signed certificate.
 
 ### SDK Testing 
 
-Download the SDK and set the `origin` parameter as `0.0.0.0:4443`.
+Download your SDK and set the `origin` host parameter as `0.0.0.0:4443`.
 This will test HTTP/1.1 againts HTTP/2 endpoint.
-Here is an example with Python:
+Here is an example with Python Requests Lib:
 
 ```python
 import requests
