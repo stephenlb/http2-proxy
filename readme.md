@@ -110,8 +110,12 @@ docker load < http2.tar.gz
 openssl req -new -out server.cert -x509 -days 3650 -keyout server.key -nodes -subj '/CN=0.0.0.0/O=PubNub/C=US/subjectAltName=DNS:localhost'
 ```
 
-### IP Tables for Server Host.
+### IP Tables for Server Host
+
+For using 443, you'll need to add an iptables rule.
+Allow inbound from 443 routed over 4443.
+You may use `sudo docker run -p 443:4443 http2` however this is bad practice!
 
 ```shell
-iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 80 -j REDIRECT --to-port 8080
+iptables -A PREROUTING -t nat -i eth0 -p tcp --dport 443 -j REDIRECT --to-port 4443
 ```
