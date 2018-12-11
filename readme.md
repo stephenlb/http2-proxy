@@ -7,7 +7,8 @@ to your production or staging web server.
 
 This is how to run an HTTP/2 proxy that uses HTTP/2 connections to your server.
 This will guide you on how to do it!
-By default this wlil proxy to PubNub APIs.
+By default the `nginx.conf` is setup to proxy to PubNub APIs.
+You can change this settings to point to your upstream servers.
 
 The dockerfile comes ready with HTTP/2 Nginx.
 To change the upstream value, open `nginx.conf` and set the `server`
