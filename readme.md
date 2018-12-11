@@ -54,30 +54,32 @@ And HTTP/1.1 will show up for 1.1 client requests.
 Test a url with HTTP/2.
 This example uses a PubNub URL.
 
+> `pubnubcoin.com` resolves to `0.0.0.0` for testing purposes.
+
 ```shell
-curl https://0.0.0.0:4443/time/0 -v -k --http2 ## Verbose w/ Headers
-curl https://0.0.0.0:4443/time/0    -k --http2 ## Output Response Only
+curl https://pubnubcoin.com:4443/time/0 -v -k --http2 ## Verbose w/ Headers
+curl https://pubnubcoin.com:4443/time/0    -k --http2 ## Output Response Only
 ```
 
 Test PubNub With HTTP/1.1 Backward Compatible.
 
 ```shell
-curl https://0.0.0.0:4443/time/0 -v -k --http1.1 ## Verbose w/ Headers
-curl https://0.0.0.0:4443/time/0    -k --http1.1 ## Output Response Only
+curl https://pubnubcoin.com:4443/time/0 -v -k --http1.1 ## Verbose w/ Headers
+curl https://pubnubcoin.com:4443/time/0    -k --http1.1 ## Output Response Only
 ```
 
 ### Browser Test
 
 You need to add an exception for a self-signed certificate.
 
- 1. Go to: https://0.0.0.0:4443/time/0
+ 1. Go to: https://pubnubcoin.com:4443/time/0
  2. Add exception to self-signed certificate.
- 3. Go to: https://www.pubnub.com/docs/console?channel=pubnub-twitter&origin=0.0.0.0:4443&sub=sub-c-78806dd4-42a6-11e4-aed8-02ee2ddab7fe
+ 3. Go to: https://www.pubnub.com/docs/console?channel=pubnub-twitter&origin=pubnubcoin.com:4443&sub=sub-c-78806dd4-42a6-11e4-aed8-02ee2ddab7fe
  4. You should see HTTP/2 Traffic and JSON messages from Live Tweets.
 
 ### SDK Testing 
 
-Download your SDK and set the `origin` host parameter as `0.0.0.0:4443`.
+Download your SDK and set the `origin` host parameter as `pubnubcoin.com:4443`.
 This will test HTTP/1.1 againts HTTP/2 endpoint.
 Here is an example with Python Requests Lib:
 
@@ -87,7 +89,7 @@ import requests.packages.urllib3
 requests.packages.urllib3.disable_warnings()
 
 response = requests.get(
-    'https://0.0.0.0:4443/time/0',
+    'https://pubnubcoin.com:4443/time/0',
     verify='certs/server.cert'
 )
 print(response.content)
@@ -111,6 +113,13 @@ docker load < http2.tar.gz
 ```
 
 ### Self Signed Certificate
+
+A Starfield SHA-2 Certificate is included in this repository
+assigned to `pubnubcoin.com`.
+This allows you to test PubNub HTTP2 without
+Certificate Authority errors.
+
+To generate a self signed certificate, you can use the following openssl command:
 
 ```shell
 openssl req -new -out server.cert -x509 -days 3650 -keyout server.key -nodes -subj '/CN=0.0.0.0/O=PubNub/C=US/subjectAltName=DNS:localhost'
