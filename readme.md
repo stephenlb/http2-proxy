@@ -78,11 +78,10 @@ You need to add an exception for a self-signed certificate.
  3. Go to: https://www.pubnub.com/docs/console?channel=pubnub-twitter&origin=pubnubcoin.com:4443&sub=sub-c-78806dd4-42a6-11e4-aed8-02ee2ddab7fe
  4. You should see HTTP/2 Traffic and JSON messages from Live Tweets.
 
-### SDK Testing 
+### HTTPS Testing via Python
 
-Download your SDK and set the `origin` host parameter as `pubnubcoin.com:4443`.
-This will test HTTP/1.1 againts HTTP/2 endpoint.
-Here is an example with Python Requests Lib:
+Install any needed package dependencies.
+For example `pip install requests` may be needed.
 
 ```python
 import requests
@@ -98,6 +97,50 @@ print(response.content)
 
 ```shell
 python python-test-request.py
+```
+
+### SDK Test Example
+
+Download your SDK and set the `origin` host parameter as `pubnubcoin.com:4443`.
+This will test HTTP(S)/1.1 againts HTTP(S)/2 endpoint.
+
+```
+const PubNub = require('pubnub')
+
+let pubnub = new PubNub({
+    ssl          : true,                  // <----------- secure
+    origin       : 'pubnubcoin.com:4443', // <----------- origin
+    publishKey   : 'demo',
+    subscribeKey : 'demo'
+})
+
+pubnub.addListener({
+    status: statusEvent => {
+        if (statusEvent.category === "PNConnectedCategory") {
+            publishSampleMessage()
+        }
+    },
+    message: msg => {
+        console.log(msg.message.title)
+        console.log(msg.message.description)
+    }
+})      
+
+console.log("Subscribing..")
+pubnub.subscribe({ channels: ['hello_world']  })
+
+function publishSampleMessage() {
+    let publishConfig = {
+        channel : "hello_world",
+        message : {
+            title: "greeting",
+            description: "hello world!"
+        }
+    }
+    pubnub.publish( publishConfig, ( status, response ) =>
+        console.log(response)
+    )
+}
 ```
 
 ### Export/Import Docker Container
