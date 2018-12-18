@@ -104,7 +104,7 @@ python python-test-request.py
 Download your SDK and set the `origin` host parameter as `pubnubcoin.com:4443`.
 This will test HTTP(S)/1.1 againts HTTP(S)/2 endpoint.
 
-```
+```javascript
 const PubNub = require('pubnub')
 
 let pubnub = new PubNub({
