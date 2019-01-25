@@ -50,6 +50,16 @@ And HTTP/1.1 will show up for 1.1 client requests.
 
 ![how to run an HTTP/2 proxy](https://i.imgur.com/Y20dm7M.png)
 
+### Config DNS
+
+Add this line into your DNS override file.
+
+> `sudo vi /etc/hosts`
+
+```
+0.0.0.0     pubnubcoin.com
+```
+
 ### CURL Test
 
 Test a url with HTTP/2.
